@@ -16,28 +16,48 @@
         padding: 25px;
         display: flex;
         justify-content: center;
+        flex-direction: column;
+        align-items: center;
     }
 
-    .card {
+    #full_doc {
         width: 420px;
-        background: #fdfbf7;
-        padding: 30px;
-        border-radius: 6px;
-        box-shadow: 0px 4px 10px rgba(0,0,0,0.25);
-        border: 1px solid #ccc;
+    }
+
+    .top-yellow {
+        background: #f7e7a8;
+        padding: 18px;
+        border-radius: 6px 6px 0 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 
     .name {
         font-size: 26px;
         font-weight: bold;
-        color: #2e2e2e;
-        margin-bottom: 6px;
+        margin: 0;
+        color: #1d1d1d;
     }
 
     .desg {
-        font-size: 16px;
-        color: #444;
-        margin-bottom: 25px;
+        margin-top: 6px;
+        font-size: 15px;
+        color: #333;
+    }
+
+    .radico-logo {
+        width: 60px;
+        opacity: 0.85;
+    }
+
+    .card {
+        width: 100%;
+        background: #ffffff;
+        padding: 25px;
+        border-radius: 0 0 6px 6px;
+        box-shadow: 0px 4px 10px rgba(0,0,0,0.25);
+        border: 1px solid #ccc;
     }
 
     .company {
@@ -69,40 +89,66 @@
         cursor: pointer;
     }
 
+    .second-page {
+        margin-top: 40px;
+        background: white;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0px 3px 8px rgba(0,0,0,0.2);
+        text-align: center;
+    }
+
+    .second-page img {
+        width: 100%;
+        border-radius: 8px;
+    }
 </style>
 </head>
 
 <body>
 
-<div class="card" id="card">
+<div id="full_doc">
 
-    <div class="name">Saket Somani</div>
-    <div class="desg">Senior Vice President</div>
-
-    <div class="company">Radico Khaitan Ltd</div>
-
-    <div class="info">
-        J-1/B-1 Mohan Co-operative Industrial Area<br>
-        Main Mathura Road, New Delhi<br><br>
-
-        <span class="label">Tel:</span> (91-11) 4097 5444/555<br>
-        <span class="label">Direct:</span> (91-11) 4097 5542<br>
-        <span class="label">Mobile:</span> +91-9731966789<br>
-        <span class="label">Email:</span> somanis@radico.co.in<br>
-        <span class="label">Website:</span> www.radicokhaitan.com
+    <!-- PAGE 1 -->
+    <div class="top-yellow">
+        <div>
+            <div class="name">Saket Somani</div>
+            <div class="desg">Senior Vice President</div>
+        </div>
+        <img src="https://raw.githubusercontent.com/singhRadico/employee_data/main/radico_logo.png" class="radico-logo">
     </div>
 
-    <button class="download-btn" onclick="downloadPDF()">Download PDF</button>
+    <div class="card">
+        <div class="company">Radico Khaitan Ltd</div>
+
+        <div class="info">
+            J-1/B-1 Mohan Co-operative Industrial Area<br>
+            Main Mathura Road, New Delhi<br><br>
+
+            <span class="label">Tel:</span> (91-11) 4097 5444/555<br>
+            <span class="label">Direct:</span> (91-11) 4097 5594<br>
+            <span class="label">Mobile:</span> +91-9731966789<br>
+            <span class="label">Email:</span> somanis@radico.co.in<br>
+            <span class="label">Website:</span> www.radicokhaitan.com
+        </div>
+
+        <button class="download-btn" onclick="downloadPDF()">Download PDF</button>
+    </div>
+
+    <!-- PAGE 2 -->
+    <div class="second-page">
+        <img src="https://raw.githubusercontent.com/singhRadico/employee_data/main/brand_page.jpg">
+    </div>
 
 </div>
 
 <script>
 function downloadPDF() {
-    const element = document.getElementById('card');
+    const element = document.getElementById('full_doc');
 
     html2pdf()
         .set({
-            margin: 10,
+            margin: 5,
             filename: 'Saket_Somani_EmployeeCard.pdf',
             html2canvas: { scale: 2 },
             jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
