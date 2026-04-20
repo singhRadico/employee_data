@@ -9,18 +9,31 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
 
 <style>
+    * {
+        box-sizing: border-box;
+    }
+
+    html, body {
+        width: 100%;
+        min-height: 100%;
+    }
+
     body {
         font-family: 'Georgia', serif;
         background: #e8e6d9;
         margin: 0;
-        padding: 25px;
+        padding: 20px;
         display: flex;
         justify-content: center;
         flex-direction: column;
         align-items: center;
+        overflow-x: hidden;
     }
 
-    #full_doc { width: 430px; }
+    #full_doc {
+        width: 100%;
+        max-width: 430px;
+    }
 
     .top-yellow {
         background: #f7e7a8;
@@ -30,11 +43,12 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        gap: 14px;
     }
 
-    .name { font-size: 24px; font-weight: bold; margin: 0; }
-    .desg { font-size: 16px; margin-top: 3px; }
-    .logo { width: 70px; height: auto; }
+    .name { font-size: 24px; font-weight: bold; margin: 0; overflow-wrap: anywhere; }
+    .desg { font-size: 16px; margin-top: 3px; overflow-wrap: anywhere; }
+    .logo { width: 70px; height: auto; flex: 0 0 auto; }
 
     .card {
         background: white;
@@ -48,6 +62,7 @@
     .info {
         font-size: 15px;
         line-height: 1.5;
+        overflow-wrap: anywhere;
     }
 
     .label { font-weight: bold; }
@@ -69,11 +84,27 @@
         .hide-print { display: none !important; }
     }
 
-    .second-page { margin-top: 30px; text-align: center; }
+    .second-page {
+        margin-top: 30px;
+        text-align: center;
+        break-before: page;
+        page-break-before: always;
+    }
+
     .second-page img {
+        display: block;
         width: 100%;
+        height: auto;
         border-radius: 10px;
         border: 1px solid black;
+    }
+
+    @media (max-width: 480px) {
+        body { padding: 12px; }
+        .top-yellow { padding: 14px; }
+        .card { padding: 18px; }
+        .name { font-size: 22px; }
+        .hide-print { font-size: 16px; }
     }
 </style>
 </head>
@@ -146,6 +177,7 @@ function downloadPDF() {
             margin: 5,
             filename: 'Abhishek_Khaitan_EmployeeCard.pdf',
             html2canvas: { scale: 3 },
+            pagebreak: { mode: ['css', 'legacy'] },
             jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
         })
         .from(document.getElementById('full_doc'))
